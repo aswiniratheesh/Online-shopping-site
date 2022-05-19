@@ -1,0 +1,260 @@
+{% extends 'user/base.html' %}
+{% block content%}
+{% load static%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"> </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.js"></script>
+<div class="my-account-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="my-account-welcome">
+                    <div>
+                        {% if user.image %}<img src="{{user.image.url}}" alt="image"
+                            style="width: 10rem; height: 10rem;border-radius: 2rem;">{%endif%}
+
+                    </div>
+                    <br><br>
+                    <h4 class="my-account-title">Welcome back!</h4>
+                    <ul>
+                        <li><a href="{% url 'user_profile' user.id%}">Personal Information</a></li>
+                        <li><a href="{% url 'edit_profile' user.id %}">Update Profile</a></li>
+                        <li><a href="{% url 'edit_address' user.id %}">Update Address</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="personal-information">
+                    <h4 class="my-account-title">Update Profile</h4>
+                    <div class="personal-information-box">
+                        <div class="">
+                        </div>
+      
+                        <form action="{% url 'edit_profile' user.id %}" method="POST" enctype="multipart/form-data"
+                            id="form">
+                            {%csrf_token%}
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="pib-item">
+                                        <label>First Name</label>
+                                        {{form.first_name}}
+                                    </div>
+                                    <div class="pib-item">
+                                        <label>Email</label>
+                                        {{form.email}}
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="pib-item">
+                                        <label>Last Name</label>
+                                        {{form.last_name}}
+                                    </div>
+                                    <div class="pib-item">
+                                        <label>Phone Number</label>
+                                        {{form.phone_no}}
+                                    </div>
+                                    <div class="pib-item pib-item-date">
+                                        <label> </label>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="fname"></label>
+                                        <img src="{{user.image.url}}" id="image1" style="width:100px;">
+                                        {{form.image}}
+                                      </div> 
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <button style="margin-top: 10px; color: white; border-color: white;"
+                                            class="btn btn-primary " id="confirm-btn"
+                                            type="submit">SUBMIT
+                              </button>
+                                </div>
+                            </div>
+                    </div>
+                    <div style="width: 400px;"  id="image-box" class="image-container m-auto"></div>
+                    <button class="btn btn-outline-info m-auto" id="crop-btn"
+                      style=" margin-top: 10px; " type="button">Crop
+                    </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- my-account-area-end -->
+<script>
+    document.forms[1].setAttribute("enctype", "multipart/form-data")
+</script>
+
+<script>
+
+    //1st crop
+    
+    // image-box is the id of the div element that will store our cropping image preview
+    const imagebox = document.getElementById('image-box')
+    // crop-btn is the id of button that will trigger the event of change original file with cropped file.
+    const crop_btn = document.getElementById('crop-btn')
+    // id_image is the id of the input tag where we will upload the image
+    const input = document.getElementById('id_image')
+    var allowedExtensions =
+    /(\.jpg|\.jpeg|\.png|\.webp)$/i;
+    
+    var filePath = input.value;
+    
+    // When user uploads the image this event will get triggered
+    input.addEventListener('change', () => {
+    if (!allowedExtensions.exec(input.value)) {
+      alert('Invalid file type');
+      input.value = '';
+    }
+    else {
+      // Getting image file object from the input variable
+      const img_data = input.files[0]
+      // createObjectURL() static method creates a DOMString containing a URL representing the object given in the parameter.
+      // The new object URL represents the specified File object or Blob object.
+      const url = URL.createObjectURL(img_data)
+    
+      // Creating a image tag inside imagebox which will hold the cropping view image(uploaded file) to it using the url created before.
+      imagebox.innerHTML = `<img src="${url}" id="image" style="width:500px;">`
+    
+      // Storing that cropping view image in a variable
+      const image = document.getElementById('image')
+    
+      // Displaying the image box
+      document.getElementById('image-box').style.display = 'block'
+      // Displaying the Crop buttton
+      document.getElementById('crop-btn').style.display = 'block'
+      // Hiding the Post button
+      document.getElementById('confirm-btn').style.display = 'none'
+    
+      // Creating a croper object with the cropping view image
+      // The new Cropper() method will do all the magic and diplay the cropping view and adding cropping functionality on the website
+      // For more settings, check out their official documentation at https://github.com/fengyuanchen/cropperjs
+      const cropper = new Cropper(image, {
+        autoCropArea: 1,
+        viewMode: 1,
+        scalable: false,
+        zoomable: false,
+        movable: false,
+        aspectRatio: 25 / 25,
+        //preview: '.preview',
+        minCropBoxWidth: 200,
+        minCropBoxHeight: 200,
+      })
+    
+      // When crop button is clicked this event will get triggered
+      crop_btn.addEventListener('click', () => {
+        // This method coverts the selected cropped image on the cropper canvas into a blob object
+        cropper.getCroppedCanvas().toBlob((blob) => {
+    
+          // Gets the original image data
+          let fileInputElement = document.getElementById('id_image');
+          // Make a new cropped image file using that blob object, image_data.name will make the new file name same as original image
+          let file = new File([blob], img_data.name, { type: "image/*", lastModified: new Date().getTime() });
+          // Create a new container
+          let container = new DataTransfer();
+          // Add the cropped image file to the container
+          container.items.add(file);
+          // Replace the original image file with the new cropped image file
+          fileInputElement.files = container.files;
+          console.log(container.files[0])
+          let img = container.files[0]
+          const url = URL.createObjectURL(img)
+          document.getElementById('image1').src = url
+    
+          // Hide the cropper box
+          document.getElementById('image-box').style.display = 'none'
+          // Hide the crop button
+          document.getElementById('crop-btn').style.display = 'none'
+          // Display the Post button
+          document.getElementById('confirm-btn').style.display = 'block'
+    
+        });
+      
+      });
+    }
+    });
+    
+    
+    
+    </script>
+    
+    
+<script>
+    $(document).ready(function (e) {
+        $.validator.addMethod("alpha", function (value, element) {
+            return this.optional(element) || value == value.match(/^[a-zA-Z\s]+$/);
+            // --                                    or leave a space here ^^
+        });
+
+        $.validator.addMethod("noSpace", function (value, element) {
+            return value == '' || value.trim(' ').length >= 4;
+        }, "At least four characters");
+
+        //email
+        $.validator.addMethod("isEmail", function (value, element) {
+            return this.optional(element) || value == value.match(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i);
+
+        });
+        //ajax call
+
+
+        $("#form").validate({
+            rules: {
+                first_name: {
+
+                    required: true,
+                    minlength: 4,
+                    alpha: true,
+                    noSpace: true,
+                },
+                last_name: {
+
+                    required: true,
+                    minlength: 1,
+                    alpha: true,
+
+                },
+                phone_no: {
+                    minlength: 10,
+                    maxlength: 10,
+                    number: true
+                },
+                email: {
+                    required: true,
+                    isEmail: true
+                },
+
+
+            },
+
+            messages: {
+                first_name: {
+                    alpha: "Please enter letters only"
+                },
+                phone_no: {
+                    number: "Please enter a valid mobile",
+                    minlength: "Please enter at least 10 digit",
+                    maxlength: "mobile number maximum contain 10 digit",
+                },
+
+                email: {
+                    isEmail: "Email not valid"
+                },
+
+
+
+            },
+        })
+
+    })
+</script>
+{%endblock%}

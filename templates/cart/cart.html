@@ -1,0 +1,298 @@
+{% extends 'user/base.html' %}
+{% block content%}
+{% load static%}
+
+
+{% if not cart_items %}
+<div xmlns="http://www.w3.org/1999/html">
+    <div class="text-center">
+        <br>
+        <img src="{% static '/images/empty-removebg-preview.png' %}" style="height: auto; width: auto;">
+        <br>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="scca-head">
+            <!-- <a class="scb-continue shopping-cart-button hvr-bs" href="#">CONTINUE SHOPPING</a> -->
+            <!-- <a class="scb-update shopping-cart-button hvr-bs" href="{% url 'checkout' %}">CONTINUE SHOPPING</a> -->
+        </div>
+    </div>
+</div>
+{% else %}
+
+<!-- shopping-head-area-start -->
+<div class="shopping-head-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="shopping-head">
+                    <div class="clerafix">
+                        <div class="sh-menu-item active">
+                            <p> <a style="font-size: large;" href="{%url 'cart_detail' %}">Shopping Cart</a></p>
+
+                            <span>01</span>
+                        </div>
+                        <div class="sh-menu-item">
+                            <p>Check Out</p>
+                            <span>02</span>
+                        </div>
+                        <div class="sh-menu-item">
+                            <p>Order Completed</p>
+                            <span>03</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- shopping-head-area-end -->
+<!-- shopping-cart-table-area-start -->
+<div class="shopping-cart-table-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="shopping-cart-table table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="cart-img-title">Image</th>
+                                <th class="cart-pro-name">Product Name</th>
+                                <th class="cart-pro-price">PrIce</th>
+                                <th class="cart-pro-quantity">Quantity</th>
+                                <th class="cart-pro-total-price">Total</th>
+                                <th class="cart-pro-remove"><i class="fa fa-times"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cart_item in cart_items %}
+
+                            <tr class="table-row1">
+                                <td class="cart_product_image_value">
+                                    <div class="pro-photo-checkout">
+                                        <a href="{{cart_item.product.get_url}}">
+                                            <img class="" src="{{cart_item.product.image1.url}}">
+                                        </a>
+                                    </div>
+							
+                                </td>
+                                <td class="cart_product_name_value">
+                                    <p class="cart_product_name">
+                                        <a href="#">{{cart_item.product.name}}</a>
+                                    </p>
+                                </td>
+                                <td class="cart_product_price_value">
+                                    <span class="product_price">${{cart_item.product.price}}</span>
+                                </td>
+                                <td class="cart_product_quantity_value">
+                                    <div class="product-quantity-t">
+                                        {%if cart_item.quantity == 1%}
+                                        <a onclick="deleteHandler('{{cart_item.product.id}}')" 
+                                            data-toggle="modal" data-target="#exampleModal">
+                                            <i class="fa fa-minus-square" style="font-size: large;"></i>
+                                        </a>
+                                        <strong style="font-size: large;">{{cart_item.quantity}}</strong>
+
+                                        <a onclick="add_item('{{cart_item.product.id}}')"> <i class="fa fa-plus-square"
+                                                aria-hidden="true" style="color: black; font-size: large;"></i></a>
+
+                                        {%else%}
+                                        
+                                        <a onclick="cart_remove('{{cart_item.product.id}}')" class="custom_icon"><i
+                                            
+                                                class="fa fa-minus-square" aria-hidden="true"
+                                                style="color: black; font-size: large;"></i></a>
+
+                                        <strong style="font-size: large;">{{cart_item.quantity}}</strong>
+                                        <a onclick="add_item('{{cart_item.product.id}}')"> <i class="fa fa-plus-square"
+                                                aria-hidden="true" style="color: black; font-size: large;"></i></a>
+                                        {%endif%}
+
+                                    </div>
+                                </td>
+                                <td class="cart_product_total_value">
+                                    <span class="product_price">${{cart_item.sub_total}}</span>
+                                </td>
+                                <td class="cart_product_name">
+                                    <a onclick="deleteHandler('{{cart_item.product.id}}')" type="button"
+                                        class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                        <i class="fa fa-trash" aria-hidden="true" style="color: black;"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h6 id='header'>Do you want to delete ?? </h6>
+                                            <input id='element' type="hidden" value='' />
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <a onclick="deletePro()" id="delete"><button type="button"
+                                                    class="btn btn-primary">Delete</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end modal -->
+
+                            {%endfor%}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- shopping-cart-table-area-end -->
+<!-- shopping-cart-content-area-start -->
+<div class="shopping-cart-content-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="scca-head">
+                    <center> <a class="shopping-cart-button hvr-bs" href="{% url 'checkout' %}">PROCEED TO CHECK OUT</a>
+                    </center>
+
+                    <!-- <a class="scb-continue shopping-cart-button hvr-bs" href="#">CONTINUE SHOPPING</a> -->
+                    <!-- <a class="scb-update shopping-cart-button hvr-bs" href="{% url 'checkout' %}">CONTINUE SHOPPING</a> -->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <!-- <div class="sccb-discount shopping-cart-content-box"> -->
+                <!-- <h3 class="sccb-title"></h3>
+                        <span class="sccb-shipping-title">Enter your coupin if you have one</span> -->
+                <!-- <div class="sccb-discount-subscribe-box clearfix">
+                            <input type="text">
+                            <a class="sccb-discount-subscribe shopping-cart-button hvr-bs" href="#">Sumbit</a>
+                        </div> -->
+                <!-- </div> -->
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <!-- <div class="sccb-cart-total shopping-cart-content-box"> -->
+                <!-- <h3 class="sccb-title"></h3>
+                        <div class="sccb-cart-content">
+                             <h6>SUB TOTAL: <span>$460.00</span></h6>
+                            <h6>GRAND TOTAL: <span>$660.00</span></h6> -->
+                <!-- </div>
+                        <span class="sccb-shipping-title"></span>
+                        <div class="sccb-cart-button">
+                            <a class="shopping-cart-button hvr-bs" href=""></a> -->
+                <!-- </div>  -->
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- shopping-cart-content-area-end -->
+<!-- cart-page-service-area-start -->
+<div class="cart-page-service-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="single-cart-page-box">
+                    <p class="satisfaction">Satisfaction 100% Guaranteed</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="single-cart-page-box">
+                    <p class="shipping">Free shipping on orders over $99</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="single-cart-page-box">
+                    <p class="return">14 day easy Return</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="single-cart-page-box">
+                    <p class="opening">Opening All Week: 8AM - 10PM</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endif%}
+</div>
+<!-- cart-page-service-area-end -->
+<script>
+
+    function deleteHandler(id) {
+        document.getElementById('element').value = id
+    }
+
+    function deletePro(id) {
+        var id = document.getElementById('element').value
+
+        $.ajax({
+            url: '/cart/full_remove/',
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                id: id,
+
+                csrfmiddlewaretoken: "{{csrf_token}}"
+            },
+            success: (response) => {
+                location.reload()
+            }
+        })
+
+    }
+</script>
+
+<script>
+
+
+    function add_item(id) {
+        $.ajax({
+            url: '/cart/add_item',
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                id: id,
+
+                csrfmiddlewaretoken: "{{csrf_token}}"
+            },
+            success: (response) => {
+                location.reload()
+            }
+        })
+
+    }
+
+
+
+    function cart_remove(id) {
+        $.ajax({
+            url: '/cart/cart_remove',
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                id: id,
+
+                csrfmiddlewaretoken: "{{csrf_token}}"
+            },
+            success: (response) => {
+                location.reload()
+            }
+        })
+
+    }
+</script>
+
+
+{%endblock%}

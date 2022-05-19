@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block metadescription %}
+        {{ product.desc |truncatewords:155 }}
+{% endblock %}
+
+{% block title %}
+        {{ product.name }}-shop cart
+{% endblock %}
+
+{% block content %}
+{% load static %}
+{% include 'navbar.html' %}
+
+
+<section class="w3l-ecommerce-main">
+	<!-- /products-->
+	<div class="ecom-contenthny py-5">
+		<div class="container py-lg-5">
+		<div style="margin: 8px auto; display: block; text-align:center;">
+
+<!---728x90--->
+<div></div>
+</div>
+			<h3 class="hny-title mb-0 text-center">Shop With <span>Us</span></h3>
+			<h4 class="text-center">Handpicked {{category.name}} just for you</h4>
+			<!-- /row-->
+			<div class="ecom-products-grids row mt-lg-5 mt-3">
+				{% for product in products %}
+				<div class="col-lg-3 col-6 product-incfhny mt-4">
+					<div class="product-grid2 transmitv">
+						<div class="product-image2">
+							<a href="{{product.get_url}}">
+								<img class="" src="{{product.image1.url}}">
+								<!-- <img class="" src="{% static 'images/shop-11.jpg' %}"> -->
+							</a>
+							
+							<ul class="social">
+								<a href="{% url 'add_wishlist' product.id %}" class="btn btn-sm btn-danger "><i class="fa fa-heart"></i></a>
+							</ul>				
+							<div class="transmitv single-item">
+								{% if product.stock == 0%}
+								<button type="submit" class="transmitv-cart ptransmitv-cart add-to-cart">
+									OUT OF STOCK
+								</button>
+								{%else%}
+								<form action="{% url 'add_cart' product.id %}" method="post">
+								{%csrf_token%}
+									<button onclick="pop()" type="submit" class="transmitv-cart ptransmitv-cart add-to-cart">
+										Add to Cart
+									</button>
+								</form>
+								{%endif%}
+
+							</div>
+						</div>
+						<div class="product-content">
+							<h3 class="title"><a href="{% url 'single_view' product.category product.slug %}">{{product.name}}</a></h3>
+							{% if product.offer %}
+							<b style="color: red;">{{product.offer}}% off</b><br>
+							<span class="price"><del>{{product.actual_price}}</del>RS {{product.price}}</span>
+							{%else%}
+							<span class="price">RS {{product.price}}</span>
+							{%endif%}
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+		</div>
+	</div>
+</section>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+ function pop(){
+	swal({
+     text: "Product added to cart.",
+     type: "success",
+     timer: 1000,
+	 button : false
+     });
+ }
+</script>
+{%endblock%}
+

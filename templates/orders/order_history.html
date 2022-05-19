@@ -1,0 +1,136 @@
+{% extends 'user/base.html' %}
+{% block content%}
+{% load static%}  
+    
+    <!-- shopping-cart-table-area-start -->
+    <div class="shopping-cart-table-area" style="margin-top: 5rem;">
+        <div class="container" >
+            <div class="row" style="margin-top: 5rem;">
+                <div class="col-xs-12">
+                    <div class="shopping-cart-table table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="cart-img-title">Image</th>
+                                    <th class="cart-pro-name">Product Name</th>
+                                    <th class="cart-pro-price">PrIce</th>
+                                    <th class="cart-pro-quantity">Quantity</th>
+                                    <th class="cart-pro-quantity">Created</th>
+                                    <th class="cart-pro-total-price">Status</th>
+                                    <th class="cart-pro-total-price"></th>
+                                    <!-- <th class="cart-pro-remove"><i class="fa fa-times"></i></th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                              {% for item in order_item %}  
+                              <tr class="table-row1">
+                                    <td class="cart_product_image_value">
+                                        <div class="pro-photo-checkout">
+                                            <img src="{{item.product.image1.url}}" alt="" />
+                                        </div>
+                                    </td>
+                                    <td class="cart_product_name_value">
+                                        <p class="cart_product_name">
+                                            <a href="#">{{item.product}}</a>
+                                        </p>
+                                    </td>
+                                    <td class="cart_product_price_value">
+                                        <span class="product_price">${{item.product_price}}</span>
+                                    </td>
+                                    <td class="cart_product_quantity_value">
+                                      <span class="product_price">{{item.quantity}}</span>
+                                    </div>
+                                    </td>
+                                    <td class="cart_product_quantity_value">
+                                      <span class="product_price">{{item.created_at}}</span>
+                                    </div>
+                                    </td>
+                                    <td class="cart_product_total_value">
+                                      <span class="product_price">{{item.status}}</span>
+                                  </td>
+
+                                  {% if item.status == 'Shipped' or item.status == 'Placed' %}
+                                  <td class="cart_product_total_value">
+                                    <a onclick="cancelHandler('{{item.id}}')" data-toggle="modal" data-target="#exampleModal">Cancel </a>
+                                </td> 
+                                {% elif item.status == 'Delivered' %}
+                                <td class="cart_product_total_value">
+                                    <a onclick="returnHandler('{{item.id}}')" data-toggle="modal" data-target="#exampleModal1">Return </a>
+                              </td> 
+                              {%else%}
+                                <td class="cart_product_total_value">
+                                </td>
+                                </tr>
+                                {%endif%}
+                                {%endfor%}
+                            </tbody>
+                        </table>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cancel Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <h6 id='header'>Do you want to cancel ?? </h6>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a id="ok"><button type="button"
+                        class="btn btn-primary">OK</button></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end modal -->
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Return Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <h6 id='header'>Do you want to Return ?? </h6>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a id="yes"><button type="button"
+                        class="btn btn-primary">OK</button></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end modal -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function cancelHandler(data){
+            document.getElementById('ok').href = '/orders/order_cancel/'+data
+        }
+            
+    </script>
+
+<script>
+    function returnHandler(data){
+        document.getElementById('yes').href = '/orders/order_return/'+data
+    }
+        
+</script>
+
+{%endblock%}
+

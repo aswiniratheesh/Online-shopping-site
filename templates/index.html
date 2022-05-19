@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% include 'header.html' %}
+<!-- New toolbar-->
+<section class="w3l-grids-hny-2">
+	<!-- /content-6-section -->
+	<div class="grids-hny-2-mian py-5">
+		<div class="container py-lg-5">
+				
+			<h3 class="hny-title mb-0 text-center">Shop With <span>Us</span></h3>
+			<p class="mb-4 text-center">Handpicked Favourites just for you</p>
+			<div class="welcome-grids row mt-5">
+				{% for cat in links %}
+				<div class="col-lg-3 col-md-4 col-6 welcome-image">
+						<div class="boxhny13">
+								<a href="{{cat.get_url}}">
+										<img src="{{cat.image1.url}}" class="" alt="" />
+								<div class="boxhny-content">
+									<h3 class="title">Product
+								</div>
+							</a>
+						</div>
+						<h4><a href="{{cat.get_url}}">{{ cat.name}}</a></h4>
+
+				</div>
+				{% endfor %}
+			</div>
+
+		</div>
+	</div>
+</section>
+
+<!-- //content-6-section -->
+        {% if category %}
+            <div class="row my_row_class">
+                <div class="mx-auto">
+                    <p><a href="{% url 'allproduct' %}"> Our product collections</a>{{category.name}}</p>
+                </div>
+            </div>
+        {% else %}
+            <div>
+                <!-- <center><img class="my_image my_image_padding" src="{% static 'img/banner.png' %}" alt=""></center> -->
+            </div>
+        {% endif %}
+
+
+<div class="mx-auto">
+        {% if category %}
+            <img class="my_image" src="{{category.image1.url}}" alt="{{ category.name }}">
+</div><br>
+<div>
+    <h1 class="text-centre my_title">{{category.name}}</h1>
+    <p class="text-justify">{{category.desc}}</p>
+</div>
+
+<br>
+<div>
+    <h1 class="text-centr my_title">our product collections</h1>
+    <p class="text-justify">What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?
+</p>
+</div>
+{% endif %}
+
+
+
+
+
+<section class="w3l-content-w-photo-6">
+	<!-- /specification-6-->
+	  <div class="content-photo-6-mian py-5">
+			 <div class="container py-lg-5">
+					<div class="align-photo-6-inf-cols row">
+						
+						<div class="photo-6-inf-right col-lg-6">
+								<h3 class="hny-title text-left">All Branded Women's Suits are Flat <span>30% Discount</span></h3>
+								<p>Visit our shop to see amazing creations from our designers.</p>
+								<a href="{% url 'all_product' %}" class="read-more btn">
+										Shop Now
+								</a>
+						</div>
+						<div class="photo-6-inf-left col-lg-6">
+						</div>
+					</div>
+				 </div>
+			 </div>
+	 </section>
+   <!-- //specification-6-->
+     
+
+<section class="w3l-ecommerce-main">
+		<div class="ecom-contenthny py-5">
+		<div class="container py-lg-5">
+		<div style="margin: 8px auto; display: block; text-align:center;">
+
+<!---728x90--->
+ 
+</div>
+			<h3 class="hny-title mb-0 text-center">Latest <span> Products</span></h3>
+			<p class="text-center">Handpicked Favourites just for you</p>
+			<!-- /row-->
+			<div class="ecom-products-grids row mt-lg-5 mt-3">
+				{% for product in products %}
+				<div class="col-lg-3 col-6 product-incfhny mt-4">
+					<div class="product-grid2 transmitv">
+						<div class="product-image2">
+							<a href="{{product.get_url}}">
+								<img class="" src="{{product.image1.url}}">
+								<!-- <img class="" src="{% static 'images/shop-11.jpg' %}"> -->
+							</a>
+							<ul class="social">
+								<a href="{% url 'add_wishlist' product.id %}" class="btn btn-sm btn-danger "><i class="fa fa-heart"></i></a>
+							</ul>	
+							<div class="transmitv single-item">
+							<form action="{% url 'add_cart' product.id %}" method="post">
+								{%csrf_token%}
+								{% if product.stock == 0%}
+								<button  class="transmitv-cart ptransmitv-cart add-to-cart">
+									OUT OF STOCK
+								</button>
+								{%else%}
+									<button type="submit" class="transmitv-cart ptransmitv-cart add-to-cart">
+										Add to Cart
+									</button>
+									{%endif%}
+								</form>
+							</div>
+						</div>
+						<div class="product-content">
+							<h3 class="title"><a href="{% url 'single_view' product.category product.slug %}">{{product.name}} </a></h3>
+							{% if product.offer %}
+							<b style="color: red;">{{product.offer}}% off</b><br>
+							
+							<span class="price"><del>{{product.actual_price}}</del>RS {{product.price}}</span>
+							{%else%}
+							<span class="price">RS {{product.price}}</span>
+							{%endif%}						</div>
+					</div>
+				</div>
+				{% endfor %}
+				
+		</div>
+	</div>
+</section>
+
+
+{% endblock %}

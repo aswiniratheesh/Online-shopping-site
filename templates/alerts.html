@@ -1,0 +1,29 @@
+<script src="jquery-3.5.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% if messages %}
+
+    {% for message in messages %}
+    <div id="message_container" class="message_container">
+    <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %} role="alert">
+     <button type="button" class="close" data-dismiss="alert">
+    <span aria-hidden="true">
+        &times;
+    </span>
+     </button>
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error: {% endif %}
+        {{ message }}
+    </div>
+    </div>
+    {% endfor %}
+{% endif %}
+
+
+
+<script>
+    var message_ele = document.getElementById("message_container");
+
+setTimeout(function(){ 
+   message_ele.style.display = "none"; 
+}, 1000);
+// Timeout is 3 sec, you can change it
+</script>

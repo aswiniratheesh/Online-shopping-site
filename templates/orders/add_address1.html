@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-md-8 col-sm-12 col-xs-12">
+        <div class="your-order-box">
+            <h4 class="checkout-box-title">Delivery Address</h4>
+            <div class="yob-content">
+                <p class="yobc-title"> <span></span></p>
+                {% for addr in adresses %}
+
+                <ul>
+                    <li class="clearfix">{{addr.country}}</li>
+                    <li class="">{{addr.state}}</li>
+
+
+                </ul>
+                {%endfor%}
+              
+
+
+

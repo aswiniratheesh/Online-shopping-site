@@ -1,0 +1,502 @@
+{% load static %}
+
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+-->
+<!doctype html>
+<html lang="zxx">
+
+
+<!-- Mirrored from p.w3layouts.com/demos_new/template_demo/30-04-2020/sprystore-liberty-demo_Free/1528800197/web/ecommerce-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Sep 2021 13:07:53 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>shoppers </title>
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="{% static 'css/style-liberty.css' %}">
+  <!-- Template CSS -->
+  <link href="http://fonts.googleapis.com/css?family=Oswald:300,400,500,600&amp;display=swap" rel="stylesheet">
+  <link href="http://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,900&amp;display=swap" rel="stylesheet">
+  <!-- Template CSS -->
+
+</head>
+<script src="{% static 'm.servedby-buysellads.com/monetization.js' %}" type="text/javascript"></script>
+<script async src="{% static 'js/autotrack.js' %}"></script>
+<script async src='https://www.googletagmanager.com/gtag/js?id=UA-149859901-1'></script>
+<meta name="robots" content="noindex">
+
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+
+<body>
+  <!-- New toolbar-->
+  <div class="pull-right toggle-right-sidebar">
+    <span class="fa title-open-right-sidebar tooltipstered fa-angle-double-right"></span>
+  </div>
+
+  <div id="right-sidebar" class="right-sidebar-notifcations nav-collapse">
+    <div class="bs-example bs-example-tabs right-sidebar-tab-notification" data-example-id="togglable-tabs">
+
+    </div>
+    <div class="right-sidebar-panel-content animated fadeInRight" tabindex="5003"
+      style="overflow: hidden; outline: none;">
+    </div>
+  </div>
+  </div>
+  </div>
+
+  <section class="w3l-banner-slider-main inner-pagehny">
+    <div class="breadcrumb-infhny">
+
+      <div class="top-header-content">
+        <header class="tophny-header">
+          <div class="container-fluid">
+            <div class="top-right-strip row">
+              <!--/left-->
+              <div class="top-hny-left-content col-lg-6 pl-lg-0">
+              </div>
+              <div class="overlay-login text-left">
+                <button type="button" class="overlay-close1">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+                <div class="wrap">
+                  <h5 class="text-center mb-4">Login Now</h5>
+                  <div class="login-bghny p-md-5 p-4 mx-auto mw-100">
+                    <!--/login-form-->
+
+
+                  </div>
+                  <!---->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--/nav-->
+          <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid serarc-fluid">
+              <a class="navbar-brand" href="{% url 'home' %}">
+                Shop<span class="lohny">p</span>ers</a>
+              <!-- if logo is image enable this   
+                    <a class="navbar-brand" href="#index.html">
+                      <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+                    </a> -->
+             
+  <!--/search-right-->
+  <div class="col-md-7 col-sm-8 col-xs-12">
+    <div class="header-top-right">
+        <div class="htr-search">
+            <form action="{% url 'search' %}">
+                <div class="htr-search-content">
+                    <input style="border:none" type="text" placeholder="Search here..." name="q">
+                    <button style="border:none"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
+        </div>
+        <div class="top-checkout">
+        </div>
+       
+    </div>
+</div>
+          <!--//search-right-->
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon fa fa-bars"> </span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'allproduct' %}">Home</a>
+                  </li>
+
+                  {% if user.is_authenticated %}
+
+                  <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class="fa fa-user" aria-hidden="true"></span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{% url 'user_logout' %}">Logout</a>
+                      <a class="dropdown-item" href="{% url 'user_profile' user.id%}">My Profile</a>
+                      <a class="dropdown-item" href="{% url 'order_history'%}">My Orders</a>
+                    </div>
+                  </li>
+                  {% endif %}
+
+                  <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Shopping
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{% url 'all_product' %}">All products</a>
+                      {% for cat in links %}
+                      <a class="dropdown-item" href="{{cat.get_url}}">{{cat.name}}</a>
+                      {%endfor%}
+                    </div>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'view_wishlist' user.id %}">WISHLIST</a>
+                </li>
+                  <li class="transmitvcart galssescart2 cart cart box_1">
+                    <form action="{% url 'cart_detail' %}" method="get" class="">
+                      <button class="top_transmitv_cart" type="submit" name="submit" value="">
+                        My Cart{{cart_count}}
+                        <span class="fa fa-shopping-cart"></span>
+                      </button>
+                    </form>
+                  </li>
+                </ul>
+
+              </div>
+            </div>
+          </nav>
+          <!--//nav-->
+        </header>
+        <div class="breadcrumb-contentnhy">
+          <div class="container">
+            <nav aria-label="breadcrumb">
+              <h2 class="hny-title text-center">shoppers</h2>
+              <ol class="breadcrumb mb-0">
+                <li><a href="{% url 'allproduct' %}">Home</a>
+                  <span class="fa fa-angle-double-right"></span>
+                </li>
+                <li class="active">Shop Single</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <section class="w3l-ecommerce-main-inn">
+  
+
+    <!--/ecommerce-single-->
+    <div class="ecomrhny-content-inf py-5">
+      <div class="container py-lg-5">
+        <!--/row1-->
+        <div class="sp-store-single-page row">
+          <div class="col-lg-5 single-right-left">
+            <div class="flexslider1">
+
+              <ul class="slides">
+
+                <li data-thumb="{{product.image1.url}}">
+                  <div class="thumb-image"> <img src="{{product.image1.url}}" data-imagezoom="true" class="img-fluid" alt=" ">
+                  </div>
+                  
+                </li>
+                <li data-thumb="{{product.image2.url}}">
+                  <div class="thumb-image"> <img src="{{product.image2.url}}" data-imagezoom="true" class="img-fluid" alt=" ">
+                  </div>
+                </li>
+                <li data-thumb="{{product.image3.url}}">
+                  <div class="thumb-image"> <img src="{{product.image3.url}}" data-imagezoom="true" class="img-fluid"
+                      alt=" "> </div>
+                </li>
+                <li data-thumb="{{product.image4.url}}">
+                  <div class="thumb-image"> <img src="{{product.image4.url}}" data-imagezoom="true" class="img-fluid"
+                      alt=" "> </div>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+
+            <div class="eco-buttons mt-5">
+
+              <div class="transmitv single-item">
+
+
+                  
+                  {% if product.stock == 0%}
+								    <b style="color: red;">OUT OF STOCK</b>
+
+								  {%else%}
+                  <div class="buy-now" > <a onclick="pop()" href="{% url 'add_cart' product.id %}" class="action btn">Add to Cart</a></div>
+                  {%endif%}
+              </div>
+              {% if product.stock == 0%}
+							{%else%}
+              <div class="buy-now"> <a href="{% url 'buy_now' product.id %}" class="action btn">Buy Now </a></div>
+              {%endif%}
+            </div>
+          </div>
+          <div class="col-lg-7 single-right-left pl-lg-4">
+            <h3>{{product.name}}
+            </h3>
+            <div class="caption">
+
+              <ul class="rating-single">
+                <li>
+                  <a href="#">
+                    <!-- <span class="fa fa-star yellow-star" aria-hidden="true"></span> -->
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <!-- <span class="fa fa-star yellow-star" aria-hidden="true"></span> -->
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <!-- <span class="fa fa-star yellow-star" aria-hidden="true"></span> -->
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <!-- <span class="fa fa-star-half-o yellow-star" aria-hidden="true"></span> -->
+                  </a>
+                </li>
+                <li>
+                  
+                    <!-- <span class="fa fa-star-half yellow-star" aria-hidden="true"></span> -->
+                </li>
+              </ul>
+
+
+              {% if product.offer %}
+							<span class="item_price"><del>Rs {{product.actual_price}}</del>&nbsp; RS {{product.price}}</span>
+							{%else%}
+							<span class="item_price">RS {{product.price}}</span>
+							{%endif%}
+              
+            </div>
+            <div class="desc_single my-4">
+            </div>
+            <div class="desc_single mb-4">
+              <h5>Description:</h5>
+              <p>{{product.desc}}</p>
+            </div>
+            <div class="description-apt d-grid mb-4">
+              <div class="occasional">
+                <h5 class="sp_title mb-3">Highlights:</h5>
+                <ul class="single_specific">
+                  <li>
+                    Neck : Round Neck</li>
+                  <li>
+                    Fit : Regular</li>
+
+                  <li> Sleeve : Half Sleeve
+                  </li>
+                  <li> Material : Pure Cutton</li>
+
+                </ul>
+
+              </div>
+
+              <div class="color-quality">
+                <h5 class="sp_title">Services:</h5>
+                <ul class="single_serv">
+                  <li>
+                    <a href="#">30 Day Return Policy</a>
+                  </li>
+                  <li class="gap">
+                    <a href="#">Cash on Delivery available</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="description mb-4">
+              <!-- <h5>Check delivery, payment options and charges at your location</h5> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!--//row1-->
+    </div>
+    <!--//ecommerce-single-->
+  </section>
+
+  <div style="margin: 8px auto; display: block; text-align:center;">
+
+    <!---728x90--->
+
+  </div>
+  <section class="w3l-footer-22">
+    <!-- footer-22 -->
+    <div class="footer-hny py-5">
+        <div class="container py-lg-5">
+            <div class="text-txt row">
+                <div class="right-side col-lg-8 pl-lg-5">
+                    <div class="sub-columns">
+                        <div class="sub-one-left">
+                            <h6>Useful Links</h6>
+                            <div class="footer-hny-ul">
+                                <ul>
+                                    <li><a href="{%url 'home' %}">Home</a></li>
+                                    <!-- <li><a href="about.html">About</a></li> -->
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="sub-two-right">
+                            <h6>Our Store</h6>
+                            <p class="mb-5">49436 Broaddus Honey Court Avenue, Madisonville KY 95020, United States of America</p>
+
+                            <h6>We accept:</h6>
+                            <ul>
+                                <li><a class="pay-method" href="#"><span class="fa fa-cc-paypal"
+                                            aria-hidden="true"></span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="below-section row">
+                <div class="columns col-lg-6 text-lg-right">
+                  <p>© 2020 Shoppers. All rights reserved. Design by <a href="" target="">
+                            </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //titels-5 -->
+
+</section>  
+      <button onclick="topFunction()" id="movetop" title="Go to top">
+            <span class="fa fa-angle-double-up"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- //titels-5 -->
+    <!-- move top -->
+
+    <script>
+      // When the user scrolls down 20px from the top of the document, show the button
+      window.onscroll = function () {
+        scrollFunction()
+      };
+
+      function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+          document.getElementById("movetop").style.display = "block";
+        } else {
+          document.getElementById("movetop").style.display = "none";
+        }
+      }
+
+      // When the user clicks on the button, scroll to the top of the document
+      function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+      }
+    </script>
+    <!-- /move top -->
+  </section>
+
+
+
+
+  <div id="v-w3layouts"></div>
+  <script>(function (v, d, o, ai) { ai = d.createElement('script'); ai.defer = true; ai.async = true; ai.src = v.location.protocol + o; d.head.appendChild(ai); })(window, document, '../../../../../../../a.vdo.ai/core/v-w3layouts/vdo.ai.js');</script>
+</body>
+
+
+<!-- Mirrored from p.w3layouts.com/demos_new/template_demo/30-04-2020/sprystore-liberty-demo_Free/1528800197/web/ecommerce-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Sep 2021 13:07:55 GMT -->
+
+</html>
+
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+<!--/login-->
+<script>
+  $(document).ready(function () {
+    $(".button-log a").click(function () {
+      $(".overlay-login").fadeToggle(200);
+      $(this).toggleClass('btn-open').toggleClass('btn-close');
+    });
+  });
+  $('.overlay-close1').on('click', function () {
+    $(".overlay-login").fadeToggle(200);
+    $(".button-log a").toggleClass('btn-open').toggleClass('btn-close');
+    open = false;
+  });
+</script>
+<!--//login-->
+<!-- FlexSlider -->
+<script src="{% static 'js/jquery.flexslider.js' %}"></script>
+<!-- single -->
+<script src="{% static 'js/imagezoom.js' %}"></script>
+<!-- single -->
+<script>
+  // Can also be used with $(document).ready()
+  $(window).load(function () {
+    $('.flexslider1').flexslider({
+      animation: "slide",
+      controlNav: "thumbnails"
+    });
+  });
+</script>
+<script src="{% static 'js/minicart.js' %}"></script>
+<!-- //FlexSlider-->
+<!-- cart-js -->
+<script src="{% static 'js/minicart.js' %}"></script>
+<script>
+  transmitv.render();
+
+  transmitv.cart.on('transmitv_checkout', function (evt) {
+    var items, len, i;
+
+    if (this.subtotal() > 0) {
+      items = this.items();
+
+      for (i = 0, len = items.length; i < len; i++) { }
+    }
+  });
+</script>
+<!-- //cart-js -->
+<!-- price range (top products) -->
+<script src="{% static 'js/jquery-ui.js' %}"></script>
+<script>
+  //<![CDATA[ 
+  $(window).load(function () {
+    $("#slider-range").slider({
+      range: true,
+      min: 0,
+      max: 9000,
+      values: [50, 6000],
+      slide: function (event, ui) {
+        $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+      }
+    });
+    $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+
+  }); //]]>
+</script>
+<!-- //price range (top products) -->
+<!-- disable body scroll which navbar is in active -->
+
+<script>
+  $(function () {
+    $('.navbar-toggler').click(function () {
+      $('body').toggleClass('noscroll');
+    })
+  });
+</script>
+<!-- disable body scroll which navbar is in active -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+ function pop(){
+	swal({
+     text: "Product added to cart deleted.",
+     type: "success",
+     timer: 1000,
+	 button : false
+     });
+ }
+</script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from demo.dueza.com/dandy-html/dandy/13-My-Account.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Oct 2021 13:52:33 GMT -->
+<head>
+    <!--- Basic Page Needs  -->
+    <meta charset="utf-8">
+    <title>My Account </title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Mobile Specific Meta  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css3?family=Montserrat:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css3?family=Raleway:300,400,500,700" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css3/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css3/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css3/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css3/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css3/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css3/jquery.fancybox.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css3/meanmenu.css' %}">
+    <link rel="stylesheet" href="{% static 'css3/nivo-slider.css' %}">
+    <link rel="stylesheet" href="{% static 'css3/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css3/typography.css' %}">
+    <link rel="stylesheet" href="{% static 'css3/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css3/responsive.css' %}">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body data-spy="scroll" data-target="#scroll-menu" data-offset="100">
+    <div id=""></div>
+    <!-- header-start -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 col-sm-4 col-xs-12">
+                        <div class="header-top-left">
+                            <div class="logo">
+                                <a href=""><img src="{% static 'img/logo.png' %}" alt=""></a>
+                            </div>
+                            <div class="htl-title">
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-7 col-sm-8 col-xs-12">
+                        <div class="header-top-right">
+                            <div class="htr-search">
+                                <form action="{% url 'search' %}">
+                                    <div class="htr-search-content">
+                                        <input type="text" placeholder="Search here..." name="q">
+                                        <button><i class="fa fa-search"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        <div class="top-checkout">
+                            <div class="top-cart">
+                                <a href="{% url 'cart_detail' %}"><span id="top_cart"><i class="fa fa-shopping-basket"></i>Cart <span class="cart-number">{{cart_count}}</span></span>
+                                </a>
+                                
+                                </div>
+                            </div>
+
+                            
+                            <div>
+                                <a class="nav-link" href="{% url 'allproduct' %}">Home</a>
+                            </div>&nbsp;&nbsp;&nbsp;
+                                
+                                <div class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="fa fa-user" aria-hidden="true"></span>
+                                    </a>
+                                    
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{% url 'user_logout' %}">Logout</a><br>
+                                        <a class="dropdown-item" href="{% url 'user_profile' user.id%}">My Profile</a><br>
+                                        <a class="dropdown-item" href="{% url 'order_history'%}">My Orders</a>                                           
+                                    </div>
+                            
+                            </div>&nbsp;&nbsp;&nbsp;
+                            <div>
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Shopping
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="{% url 'all_product' %}">All products</a><br>
+                                            {% for cat in links %}
+                                            <a class="dropdown-item" href="{{cat.get_url}}">{{cat.name}}</a><br>
+                                            {%endfor%}
+                                        </div>
+                            </div>
+
+                        </div>      
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- mobile-menu-start -->
+        
+        <!-- mobile-menu-end -->
+    </header>
+    {%block content%}
+
+    {%endblock%}
+        <!-- my-account-area-end -->
+    <!-- Scripts -->
+    <script src="{% static 'js3/jquery-3.2.0.min.js' %}"></script>
+    <script src="{% static 'js3/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js3/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js3/countdown.js' %}"></script>
+    <script src="{% static 'js3/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js3/jquery.fancybox.min.js' %}"></script>
+    <script src="{% static 'js3/jquery.meanmenu.js' %}"></script>
+    <script src="{% static 'js3/jquery.nivo.slider.pack.js' %}"></script>
+    <script src="{% static 'js3/jquery.scrollUp.js' %}"></script>
+    <script src="{% static 'js3/jquery.mixitup.min.js' %}"></script>
+    <script src="{% static 'js3/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'js3/jquery-ui.js' %}"></script>
+    <script src="{% static 'js3/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js3/theme.js' %}"></script>
+</body>
+
+
+<!-- Mirrored from demo.dueza.com/dandy-html/dandy/13-My-Account.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Oct 2021 13:52:33 GMT -->
+</html>

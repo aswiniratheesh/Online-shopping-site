@@ -1,0 +1,271 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Admin</title>
+  <!-- plugins:css -->
+  <link rel="shortcut icon" href="{% static 'images1/favicon.ico' %}" />
+  <link rel="stylesheet" href="{% static 'vendors1/mdi/css/materialdesignicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors1/css/vendor.bundle.base.css' %}">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <!-- endinject -->
+  <!-- Layout styles -->
+  <link rel="stylesheet" href="{% static 'css1/style.css' %}">
+  <!-- End layout styles -->
+  <link rel="shortcut icon" href="{% static 'images1/favicon.ico' %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style>
+    .dropbtn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .dropdown-content a:hover {background-color: #f1f1f1}
+    
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    
+    .dropdown:hover .dropbtn {
+      background-color: #3e8e41;
+    }
+    </style>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+      <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo-mini" href=""><img src="{% static 'images1/logo-mini.svg' %}"
+              alt="logo" /></a>
+        </div>
+
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            <span class="mdi mdi-menu"></span>
+          </button>
+          <div class="search-field d-none d-md-block">
+            <form class="d-flex align-items-center h-100" action="#">
+            </form>
+          </div>
+
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item nav-profile dropdown">
+              <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown"
+                aria-expanded="false">
+                <div class="nav-profile-img">
+                  <img src="{% static 'images1/dp.jpeg' %}" alt="image">
+                  <span class="availability-status online"></span>
+                </div>
+                <div class="nav-profile-text">
+                  {% if user.is_authenticated %}
+                  <p class="mb-1 text-black">{{user.first_name}}</p>
+                  {% endif %}
+                </div>
+              </a>
+              <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                <!-- <a class="dropdown-item" href="#">
+                  <i class="mdi mdi-cached mr-2 text-success"></i> Activity Log </a> -->
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'admin_logout' %}">
+                  <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </a>
+              </div>
+            </li>
+            <li class="nav-item d-none d-lg-block full-screen-link">
+              <a class="nav-link">
+                <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+              </a>
+            </li>
+          </ul>
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+            data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar card py-2 mb-4">
+        <!-- <nav class="sidebar sidebar-offcanvas" id="sidebar"> -->
+          <ul class="nav flex-column" id="nav_accordion">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                  <img src="{% static 'images1/dp.jpeg' %}" alt="profile">
+                  <span class="login-status online"></span>
+                  <!--change to offline or busy as needed-->
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                  {% if user.is_authenticated %}
+                  <span class="font-weight-bold mb-2">{{user.first_name}}</span>
+                  {%endif%}
+                  <span class="text-secondary text-small"></span>
+                </div>
+                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'admin_home' %}">
+                <span class="menu-title">DASHBOARD</span>
+                <i class="mdi mdi-home menu-icon"></i>
+              </a>
+              
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'user_man' %}">
+                <span class="menu-title">USER MANAGEMENT</span>
+                <i class="mdi mdi-account menu-icon"></i>
+              </a>
+            </li>
+
+            <li class="nav-item has-submenu">
+              <a class="nav-link" href="{% url 'category' %}"> CATEGORY MANAGEMENT </a>
+              
+              <ul class="submenu collapse">
+                <li><a class="nav-link" href="{% url 'category' %}"> CATEGORY LIST</a></li>
+                <li><a class="nav-link" href="{% url 'add_category' %}">ADD CATEGORY </a></li>
+
+              </ul>
+            </li>
+
+            <li class="nav-item has-submenu">
+              <a class="nav-link" href="{% url 'category' %}"> PRODUCT MANAGEMENT </a>
+              
+              <ul class="submenu collapse">
+                <li><a class="nav-link" href="{% url 'product_man' %}"> PRODUCT LIST</a></li>
+                <li><a class="nav-link" href="{% url 'add_product' %}">ADD PRODUCT </a></li>
+              </ul>
+            </li>
+          
+            <li class="nav-item has-submenu">
+              <a class="nav-link" href="{% url 'category' %}"> ORDER MANAGEMENT </a>
+              
+              <ul class="submenu collapse">
+                <li><a class="nav-link" href="{% url 'active_order' %}"> ACTIVE ORDER</a></li>
+                <li><a class="nav-link" href="{% url 'ad_order_history' %}"> ORDER HISTORY </a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item has-submenu">
+              <a class="nav-link"> COUPON MANAGEMENT </a>
+              
+              <ul class="submenu collapse">
+                <li><a class="nav-link" href="{% url 'admin_coupon_list' %}"> LIST COUPON</a></li>
+                <li><a class="nav-link" href="{% url 'admin_coupon' %}"> ADD COUPON </a></li>
+              </ul>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'order_reports' %}">
+                <span class="menu-title">SALES REPORT</span>
+                <i class="mdi mdi-home menu-icon" style="margin-left: 5rem;"></i>
+              </a>
+            </li>
+
+      </ul>
+    </nav>
+
+
+
+      {% block content%}
+
+      {%endblock%}
+
+
+</div>
+
+
+
+      <!-- partial:../../partials/_footer.html -->
+      <footer class="footer">
+        <div class="container-fluid clearfix">
+          <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com
+            2020</span>
+          <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a
+              href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin
+              templates </a> from Bootstrapdash.com</span>
+        </div>
+      </footer>
+      <!-- partial -->
+    </div>
+    <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="{% static 'vendors1/js/vendor.bundle.base.js' %}"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="{% static 'js1/off-canvas.js' %}"></script>
+    <script src="{% static 'js1/hoverable-collapse.js' %}"></script>
+    <script src="{% static 'js1/misc.js' %}"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <!-- End custom js for this page -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function(){
+  document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
+    
+    element.addEventListener('click', function (e) {
+
+      let nextEl = element.nextElementSibling;
+      let parentEl  = element.parentElement;	
+
+        if(nextEl) {
+            e.preventDefault();	
+            let mycollapse = new bootstrap.Collapse(nextEl);
+            
+            if(nextEl.classList.contains('show')){
+              mycollapse.hide();
+            } else {
+                mycollapse.show();
+                // find other submenus with class=show
+                var opened_submenu = parentEl.parentElement.querySelector('.submenu.show');
+                // if it exists, then close all of them
+                if(opened_submenu){
+                  new bootstrap.Collapse(opened_submenu);
+                }
+            }
+        }
+    }); // addEventListener
+  }) // forEach
+}); 
+    </script>
+  </body>
+
+</html>

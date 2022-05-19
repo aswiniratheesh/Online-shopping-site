@@ -1,0 +1,180 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Purple Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="{% static 'vendors1/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors1/css/vendor.bundle.base.css' %}">
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="{% static 'css1/style.css' %}">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="{% static 'images1/favicon.ico' %}" />
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth">
+          <div class="row flex-grow">
+            <div class="col-lg-4 mx-auto">
+              <div class="auth-form-light text-left p-5">
+                <div class="brand-logo">
+                  <!-- <img src="{% static 'images1/logo.svg' %}"> -->
+                </div>
+                <h4>Hello! let's get started</h4>
+                <h6 class="font-weight-light">Enter your Phone Number.</h6>
+
+<!-- login form  -->
+                
+              <form action="{%url 'phone_login' %}" method="post">
+                      {% csrf_token %}
+                    <div class="">
+                      {% for message in messages%}
+                      <p style="color: rgb(180, 11, 11);">{{message}}</p>
+                      {% endfor %}
+                  </div>
+
+                  <div class="form-group">
+                    <input type="tel" id="password-field" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Enter Phone" name="phone_no" required>
+                  </div>
+
+                  <div class="mb-2">
+                    <button type="submit" class="btn btn-block btn-facebook auth-form-btn">
+                     SUBMIT </button>
+                  </div>
+
+                  </div>
+                </form>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="../../assets/vendors1/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="{% static 'js1/off-canvas.js' %}"></script>
+    <script src="../../assets/js1/hoverable-collapse.js"></script>
+    <script src="../../assets/js1/misc.js"></script>
+    <!-- endinject -->
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+form {border: 3px solid #f1f1f1;}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<h2>Login Form</h2>
+<div class="">
+    {% for message in messages%}
+    <p style="color: rgb(180, 11, 11);">{{message}}</p>
+    {% endfor %}
+</div>
+
+<form action="{%url 'phone_login' %}" method="post">
+    {%csrf_token%}
+  <div class="imgcontainer">
+    <img src="img_avatar2.png" alt="Avatar" class="avatar">
+  </div>
+
+  <div class="container">
+    <label for=""><b>Phone</b></label>
+    <input type="tel" placeholder="Enter Phone" name="phone_no" required>
+        
+    <button type="submit">Login</button>
+  </div>
+
+</form>
+
+</body>
+</html> -->

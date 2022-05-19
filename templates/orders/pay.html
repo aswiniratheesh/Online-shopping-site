@@ -1,0 +1,467 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from demo.dueza.com/dandy-html/dandy/13-My-Account.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Oct 2021 13:52:33 GMT -->
+<head>
+    <!--- Basic Page Needs  -->
+    <meta charset="utf-8">
+    <title>My Account </title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Mobile Specific Meta  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css3?family=Montserrat:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css3?family=Raleway:300,400,500,700" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css3/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css3/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css3/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css3/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css3/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css3/jquery.fancybox.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css3/meanmenu.css' %}">
+    <link rel="stylesheet" href="{% static 'css3/nivo-slider.css' %}">
+    <link rel="stylesheet" href="{% static 'css3/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css3/typography.css' %}">
+    <link rel="stylesheet" href="{% static 'css3/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css3/responsive.css' %}">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body data-spy="scroll" data-target="#scroll-menu" data-offset="100">
+    <div id="preloader"></div>
+    <!-- header-start -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 col-sm-4 col-xs-12">
+                        <div class="header-top-left">
+                            <div class="logo">
+                                <a href="01_Home%20Page.html"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                            </div>
+                            <div class="htl-title">
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-8 col-xs-12">
+                        <div class="header-top-right">
+                            <div class="htr-search">
+                                <form action="#">
+                                    <div class="htr-search-content">
+                                        <input type="text" placeholder="Search here...">
+                                        <button><i class="fa fa-search"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="login-or-register">
+                                <span id="login_register"></span>
+                                <div class="login-register-content" id="login_register_content">
+                                    <div class="lrc-login">
+                                        <h4 class="lrc-title">My account</h4>
+                                        <div class="lrc-login-form">
+                                            <form action="#">
+                                                <div class="account-name">
+                                                    <i class="fa fa-user"></i>
+                                                    <input type="text" placeholder="Account name">
+                                                </div>
+                                                <div class="password">
+                                                    <i class="fa fa-lock"></i>
+                                                    <input type="password" placeholder="Password">
+                                                </div>
+                                                <div class="remember-help">
+                                                    <input type="checkbox">
+                                                    <label></label>
+                                                    <a href="#">Help ?</a>
+                                                </div>
+                                                <div class="lrc-submit">
+                                                    <input class="hvr-bs" type="submit" value="Login">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="lrc-register">
+                                        <h4 class="lrc-title"></h4>
+                                        <div class="lrc-register-form">
+                                            <form action="#">
+                                                <input type="text" placeholder="Your mail">
+                                                <input type="password" placeholder="Password">
+                                                <div class="lrc-register-btn">
+                                                    <input class="hvr-bs" type="submit" value="Register">
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="or-register-to">
+                                            <span></span>
+                                            <ul>
+                                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-google"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="top-checkout">
+                            </div>
+                            <div class="top-cart">
+                                <span id="top_cart"><i class="fa fa-shopping-basket"></i>Cart <span class="cart-number">(3)</span></span>
+                                <div class="my-cart" id="my_cart">
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="menu-area hidden-sm hidden-xs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="menu">
+                            <nav>
+                                <ul class="menu-list">
+                                    <li class="active"><a href="{% url 'allproduct' %}">HOME</a>
+                                        
+                                    </li>
+                                    <!-- <li><a href="#">ABOUT</a></li> -->
+                                    
+
+                                    
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- mobile-menu-start -->
+        
+        <!-- mobile-menu-end -->
+    </header>
+
+
+
+
+
+
+
+
+
+    
+    <!-- my-account-area-end -->
+    <!-- footer-start -->
+    <footer>
+        <div class="footer-top-area">
+            <div class="container">
+                <div class="footer-top">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="footer-desc">
+                                <img src="{% static 'img/logo-footer.png' %}" alt="">
+                                <p>Integer posuere orci sit amet feugiat pellent que. Suspendisse vel tempor justo, sit amet posuere orci dapibus auctor</p>
+                                <div class="footer-desc-contact">
+                                    <h6>contact us: </h6>
+                                    <ul>
+                                        <li><i class="fa fa-mobile"></i>+3 (523) 555 123 8745</li>
+                                        <li><i class="fa fa-envelope-o"></i><span>email: </span> office@DANDY.com</li>
+                                        <li><i class="fa fa-map-marker"></i><span>address: </span>1st, new york, usa</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="footer-links">
+                                <h4 class="footer-title">queck links</h4>
+                                <ul class="clearfix">
+                                    <li><a href="#">home</a></li>
+                                    <li><a href="#">privacy policy</a></li>
+                                    <!-- <li><a href="#">about us</a></li> -->
+                                    <li><a href="#">login</a></li>
+                                    <li><a href="#">services</a></li>
+                                    <li><a href="#">registration</a></li>
+                                    <li><a href="#">blog</a></li>
+                                    <li><a href="#">delivery</a></li>
+                                    <li><a href="#">gallery</a></li>
+                                    <li><a href="#">pages</a></li>
+                                    <li><a href="#">contact</a></li>
+                                    <li><a href="#">our stores</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="footer-post-area">
+                                <h4 class="footer-title">some posts</h4>
+                                <div class="footer-posts">
+                                    <div class="single-footer-post">
+                                        <div class="clearfix">
+                                            <div class="footer-post-img">
+                                                <a href="#"><img src="{% static 'img/footer-post/fpost1.jpg' %}" alt=""></a>
+                                            </div>
+                                            <div class="footer-post-content">
+                                                <span class="fpc-date">apr 07 / 17</span>
+                                                <a class="fpc-title" href="#">Fusce tincidunt accumsan pretium sit amet</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-footer-post">
+                                        <div class="clearfix">
+                                            <div class="footer-post-img">
+                                                <a href="#"><img src="{% static 'img/footer-post/fpost2.jpg' %}" alt=""></a>
+                                            </div>
+                                            <div class="footer-post-content">
+                                                <span class="fpc-date">apr 07 / 17</span>
+                                                <a class="fpc-title" href="#">Fusce tincidunt accumsan pretium sit amet</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-footer-post">
+                                        <div class="clearfix">
+                                            <div class="footer-post-img">
+                                                <a href="#"><img src="{% static 'img/footer-post/fpost3.jpg' %}" alt=""></a>
+                                            </div>
+                                            <div class="footer-post-content">
+                                                <span class="fpc-date">apr 07 / 17</span>
+                                                <a class="fpc-title" href="#">Fusce tincidunt accumsan pretium sit amet</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="popular-tag">
+                                <h4 class="footer-title">popular tags</h4>
+                                <ul class="footer-tags">
+                                    <li><a href="#">headphoness</a></li>
+                                    <li><a href="#">accessories</a></li>
+                                    <li><a href="#">new</a></li>
+                                    <li><a href="#">wireless</a></li>
+                                    <li><a href="#">cabels</a></li>
+                                    <li><a href="#">devices</a></li>
+                                    <li><a href="#">gadgets</a></li>
+                                    <li><a href="#">brands</a></li>
+                                    <li><a href="#">replacements</a></li>
+                                    <li><a href="#">cases</a></li>
+                                    <li><a href="#">cables</a></li>
+                                    <li><a href="#">professional</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom-area">
+            <div class="container">
+                <div class="footer-bottom">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <div class="footer-copyright">
+                                <p>© 2017 All rights reserved. Development by <a href="#" target="_blank">DANDY</a></p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="footer-social">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="payment-method">
+                                <ul>
+                                    <li><img src="{% static 'img/payment-method/skrill.png' %}" alt=""></li>
+                                    <li><img src="{% static 'img/payment-method/bitcoin.png' %}" alt=""></li>
+                                    <li><img src="{% static 'img/payment-method/american.png' %}" alt=""></li>
+                                    <li><img src="{% static 'img/payment-method/paypal.png' %}" alt=""></li>
+                                    <li><img src="{% static 'img/payment-method/mastercard.png' %}" alt=""></li>
+                                    <li><img src="{% static 'img/payment-method/visa.png' %}" alt=""></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer-end -->
+    <!-- newsletter-popup-start -->
+    <div id="wd1_nlpopup_overlay"></div>
+    <div id="wd1_nlpopup" data-expires="30" data-delay="10">
+        <a href="#closepopup" id="wd1_nlpopup_close">x</a>
+        <h2>newsletter</h2>
+        <p>Subscribe to the Motorvehikle mailing list to receive updates on new arrivals, special offers and other discount information.</p>
+        <div class="popup-subscribe-box">
+            <input type="email">
+            <input type="submit" value="submit">
+        </div>
+        <div class="pupup-dont-show">
+            <input type="checkbox">
+            <span>Don't show this popup again</span>
+        </div>
+    </div>
+    <!-- newsletter-popup-end -->
+    <!-- modal-start -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog product-modal">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="product-tab-area">
+                            <div class="clearfix">
+                                <div class="product-tab-content tab-content">
+                                    <div id="spro1" class="tab-pane fade in active">
+                                        <a href="img/single-product/product-large1.jpg' %}" data-fancybox="images">
+                                            <i class="fa fa-search-plus"></i>
+                                            <img src="{% static 'img/single-product/product-large1.jpg' %}" alt="">
+                                        </a>
+                                    </div>
+                                    <div id="spro2" class="tab-pane fade">
+                                        <a href="img/single-product/product-large2.jpg' %}" data-fancybox="images">
+                                            <i class="fa fa-search-plus"></i>
+                                            <img src="{% static 'img/single-product/product-large2.jpg' %}" alt="">
+                                        </a>
+                                    </div>
+                                    <div id="spro3" class="tab-pane fade">
+                                        <a href="img/single-product/product-large3.jpg" data-fancybox="images">
+                                            <img src="{% static 'img/single-product/product-large3.jpg' %}" alt="">
+                                            <i class="fa fa-search-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="product-tab-menu">
+                                    <ul class="product-tab">
+                                        <a data-toggle="tab" href="#spro1"><img src="{% static 'img/single-product/product-small1.jpg' %}" alt=""></a>
+                                        <li class="active">
+                                        </li>
+                                        <a data-toggle="tab" href="#spro2"><img src="{% static 'img/single-product/product-small2.jpg' %}" alt=""></a>
+                                        <li>
+                                        </li>
+                                        <li>
+                                            <a data-toggle="tab" href="#spro3"><img src="{% static 'img/single-product/product-small3.jpg' %}" alt=""></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="single-product-description-area">
+                            <h2 class="spd-title">Turtle Neck Wool Sweater</h2>
+                            <div class="rating clearfix">
+                                <div class="star star-on"></div>
+                                <div class="star star-on"></div>
+                                <div class="star star-on"></div>
+                                <div class="star star-on"></div>
+                                <div class="star star-half"></div>
+                            </div>
+                            <p class="spd-price">$980.00 <span class="spd-old-price">$1060.00</span></p>
+                            <p class="spd-text">Cotton-blend fabric, with hood, concealed zip and snap button fastening, flap pockets, loops on the cuffs, inner lining.</p>
+                            <ul class="spd-list">
+                                <li>Satisfaction 100% Guaranteed</li>
+                                <li>Free shipping on orders over $99</li>
+                                <li>14 day easy Return</li>
+                            </ul>
+                            <div class="spd-select-color">
+                                <span>Select Color:</span>
+                                <ul>
+                                    <li>
+                                        <a class="red" href="#"></a>
+                                    </li>
+                                    <li>
+                                        <a class="black" href="#"></a>
+                                    </li>
+                                    <li>
+                                        <a class="blue" href="#"></a>
+                                    </li>
+                                    <li>
+                                        <a class="green" href="#"></a>
+                                    </li>
+                                    <li>
+                                        <a class="yellow" href="#"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="spd-select-size">
+                                <span>Select Size:</span>
+                                <ul>
+                                    <li><a href="#">s</a></li>
+                                    <li><a href="#">m</a></li>
+                                    <li><a href="#">l</a></li>
+                                    <li><a href="#">xl</a></li>
+                                    <li><a href="#">xxl</a></li>
+                                </ul>
+                            </div>
+                            <div class="spd-add-cart">
+                                <p class="quantity cart-plus-minus">
+                                    <input type="text" value="1" />
+                                </p>
+                                <button class="spd-add-to hvr-bs">ADD TO CART</button>
+                            </div>
+                            <div class="spd-meta">
+                                <div class="spd-meta-type">
+                                    <p>SKU: <span>00012 </span></p>
+                                </div>
+
+                                
+                            </div>
+                            <div class="spd-share">
+                                <span>Share Link:</span>
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal-end -->
+    <!-- Scripts -->
+    <script src="{% static 'js3/jquery-3.2.0.min.js' %}"></script>
+    <script src="{% static 'js3/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js3/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js3/countdown.js' %}"></script>
+    <script src="{% static 'js3/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js3/jquery.fancybox.min.js' %}"></script>
+    <script src="{% static 'js3/jquery.meanmenu.js' %}"></script>
+    <script src="{% static 'js3/jquery.nivo.slider.pack.js' %}"></script>
+    <script src="{% static 'js3/jquery.scrollUp.js' %}"></script>
+    <script src="{% static 'js3/jquery.mixitup.min.js' %}"></script>
+    <script src="{% static 'js3/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'js3/jquery-ui.js' %}"></script>
+    <script src="{% static 'js3/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js3/theme.js' %}"></script>
+</body>
+
+
+<!-- Mirrored from demo.dueza.com/dandy-html/dandy/13-My-Account.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Oct 2021 13:52:33 GMT -->
+</html>

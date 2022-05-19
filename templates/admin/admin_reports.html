@@ -1,0 +1,113 @@
+{%extends 'admin/base.html' %}
+{%block content%}
+<!-- partial -->
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="page-header">
+      </nav>
+    </div>
+    <div class="row">
+
+      <div class="col-md-6 col-sm-12">
+        <form action="" method="POST">
+          {%csrf_token%}
+          <label for="tableFormControlFile1">From</label>
+          <input type="date" class="form-control"  id="fromdate" name="datefrom" onchange="from(event)" value="" min="2014-1-01" max="2021-12-01" >
+          <label for="exampleFormControlFile1">to</label>
+          <input type="date" class="form-control"  id="todate" name="dateto" min="2014-1-01" max="2021-12-01">
+      <br>
+          <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+      </div>
+
+<div class="col-md-6 col-sm-12" style="margin-top: 10rem; padding-left: 2rem;">
+  {% if reports %}
+  <a href="{% url 'order_export_csv' %}" class="btn btn-primary" style="height: 3rem;">Export to CSV</a>&nbsp;&nbsp;
+  <a href="{% url 'order_export_excel' %}" class="btn btn-primary" style="height: 3rem;">Export to Excel</a>&nbsp;&nbsp;
+  <a href="{% url 'order_export_pdf' %}" class="btn btn-primary" style="height: 3rem;">Export to Pdf</a>
+  {%endif%}
+</div>
+        <div class="col-lg-12 grid-margin stretch-card" style="margin-top: 2rem;">
+          
+        <div class="card">
+          
+          <div class="card-body">
+            <!-- <h4 class="card-title">Striped Table</h4> -->
+            <!-- <p class="card-description"> Add class <code>.table-striped</code> -->
+            <!-- </p> -->
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Order Number</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">User</th>
+                  <th scope="col">Contact</th>
+                  <th scope="col">Payment</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in reports%}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>#{{i.order_number}}</td>
+
+                  <td>{{i.updated_at}}</td>
+                  <td>{{i.user}}</td>
+                  <td>{{i.user.phone_no}}</td>
+                  <td>Paypal</td>
+
+                  <td>{{i.status}}</td>
+                  <td>{{i.order_total}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      $('#table').DataTable( {
+          dom: 'Bfrtip',
+          buttons: [
+              'excelHtml5',
+              'csvHtml5',
+              'pdfHtml5'
+          ],
+          drawCallback: function () {
+              var hasRows = this.api().rows({ filter: 'applied' }).data().length > 0;
+              $('.buttons-csv')[0].style.visibility = hasRows ? 'visible' : 'hidden'
+              $('.buttons-excel')[0].style.visibility = hasRows ? 'visible' : 'hidden'
+              $('.buttons-pdf')[0].style.visibility = hasRows ? 'visible' : 'hidden'
+          }
+      } );
+  } );
+
+
+  function from(event){
+      var start_date = event.target.value
+      document.getElementById("todate").min=start_date
+  }
+
+</script>
+
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+<script src= "https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script> -->
+  {%endblock%}
+
+
+
+
+

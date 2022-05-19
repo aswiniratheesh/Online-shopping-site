@@ -1,0 +1,91 @@
+{% extends 'user/base.html' %}
+{% block content%}
+{% load static%}
+<!-- my-account-area-start -->
+<div class="my-account-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="my-account-welcome">
+                    <div>
+                        {% if user.image %}<img src="{{user.image.url}}" alt="image"
+                            style="width: 10rem; height: 10rem;border-radius: 2rem;">{%endif%}
+
+                    </div>
+                    <br><br>
+                    <h4 class="my-account-title">Welcome back!</h4>
+                    <ul>
+                        <li><a href="{% url 'user_profile' user.id%}">Personal Information</a></li>
+                        <li><a href="{% url 'edit_profile' user.id %}">Update Profile</a></li>
+                        <li><a href="{% url 'edit_address' user.id %}">Update Address</a></li>
+                        <li><a href="{% url 'current_pass' user.id %}">Change password</a></li>
+                        <li><a href="{% url 'address_book' %}">Address Book</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="personal-information">
+                    <h4 class="my-account-title">Personal information</h4>
+
+                    <div class="personal-information-box">
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12">
+                                <div class="pib-item">
+                                    <label>First Name</label>
+                                    <input type="text" placeholder="{{user.first_name}}" readonly>
+                                </div>
+                                <div class="pib-item">
+                                    <label>Email</label>
+                                    <input type="text" placeholder="{{user.email}}" readonly>
+                                </div>
+                                <div class="pib-item">
+                                    <label>Address</label>
+                                    <input type="text" placeholder="{{user.address}}" readonly>
+                                </div>
+                                <div class="pib-item">
+                                    <label>Country</label>
+                                    <input type="text" placeholder="{{user.country}}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="pib-item">
+                                    <label>Last Name</label>
+                                    <input type="text" placeholder="{{user.last_name}}" readonly>
+                                </div>
+                                <div class="pib-item">
+                                    <label>Phone Number</label>
+                                    <input type="text" placeholder="{{user.phone_no}}" readonly>
+                                </div>
+                                <div class="pib-item">
+                                    <label>State</label>
+                                    <input type="text" placeholder="{{user.state}}" readonly>
+                                </div>
+                                <div class="pib-item pib-item-state-zip">
+                                    <div class="row">
+                                        <div class="col-md-6 col-xs-12">
+                                            <label>Zip Code</label>
+                                            <input type="text" placeholder="{{user.pin}}" readonly>
+                                        </div>
+                                        <div class="col-md-6 col-xs-12">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pib-item pib-item-date">
+                                    <label></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.forms[1].setAttribute("enctype", "multipart/form-data")
+</script>
+
+<script>
+
+</script>
+{%endblock%}

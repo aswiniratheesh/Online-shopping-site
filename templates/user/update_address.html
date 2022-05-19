@@ -1,0 +1,97 @@
+{% extends 'user/base.html' %}
+{% block content%}
+{% load static%}
+
+    <!-- my-account-area-start -->
+    <div class="my-account-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="my-account-welcome">
+                        <div>
+                            {% if user.image %}<img src="{{user.image.url}}" alt="image"
+                                style="width: 10rem; height: 10rem;border-radius: 2rem;">{%endif%}
+    
+                        </div>
+                        <br><br>
+                        <h4 class="my-account-title">WElcome back!</h4>
+                        <ul>
+                            <li><a href="{% url 'user_profile' user.id%}">Personal Information</a></li>
+                            <li><a href="{% url 'edit_profile' user.id %}">Update Profile</a></li>
+                            <li><a href="{% url 'edit_address' user.id %}">Update Address</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="personal-information">
+                        
+                        <h4 class="my-account-title">Update Profile</h4>
+                        <div class="personal-information-box">
+                          <form action="{% url 'edit_address' user.id %}" method="POST">
+                            {%csrf_token%}                            
+                            <div class="row">
+
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="pib-item">
+                                        <label>Address</label>
+                                        {{form.address}}
+                                    </div>
+                                    <div class="pib-item">
+                                        <label>Town</label>
+                                        {{form.town}}
+                                    </div>       
+                                </div>
+
+
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="pib-item">
+                                        <label>District</label>
+                                        {{form.district}}                                     
+                                    </div>
+                                    <div class="pib-item">
+                                        <label>Pin Number</label>
+                                        {{form.pin}}
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6 col-xs-12">
+                                  <div class="pib-item">
+                                      <label>State</label>
+                                      {{form.state}}                                     
+                                  </div>
+                                  <div >
+                                      <label></label>
+                                  </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12">
+                                  <div class="pib-item">
+                                      <label>Country</label>
+                                      {{form.country}}                                     
+                                  </div>
+                                  <div >
+                                      <label></label>
+                                  </div>
+                                </div>
+                              
+                              
+
+                              <div class="col-xs-12">
+                                    <div class="pib-save-change">
+                                      <input type="submit" value="submit" class="btn btn-success" ></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- my-account-area-end -->
+    <script>    
+      document.forms[1].setAttribute("enctype","multipart/form-data")
+    </script>
+  
+
+  {%endblock%}

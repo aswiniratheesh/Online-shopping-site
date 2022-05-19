@@ -1,0 +1,105 @@
+{% extends 'user/base.html' %}
+{% block content%}
+{% load static%}
+
+    <!-- my-account-area-start -->
+    <div class="my-account-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                   
+                </div>
+                <div class="col-md-9">
+                    <div class="personal-information">
+                        <h4 class="my-account-title">Update Profile</h4>
+                        <div class="personal-information-box">
+                          <form action="" method="POST">
+                            {%csrf_token%}                            
+                            <div class="row">
+
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="pib-item">
+                                        <label>First Name</label>
+                                        {{address_form.first_name}}
+                                        
+                                    </div>
+                                    <div class="pib-item">
+                                        <label>Address Line1</label>
+                                        {{address_form.address_line_1}}
+                                </div>
+
+
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="pib-item">
+                                        <label>Last Name</label>
+                                        {{address_form.last_name}}
+                                    </div>
+                                    <div class="pib-item">
+                                        <label>Address Line2</label>
+                                        {{address_form.address_line_2}}
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6 col-xs-12">
+                                  <div class="pib-item">
+                                      <label>State</label>
+                                      {{address_form.state}}
+                                    </div>
+                                  <div class="pib-item">
+                                    <label>City</label>
+                                    {{address_form.city}}
+                                  </div>
+                                </div>
+                                
+                                <div class="col-md-6 col-xs-12">
+                                  <div class="pib-item">
+                                      <label>Country</label>
+                                      {{address_form.country}}
+                                    </div>
+                                  <div class="pib-item">
+                                      <label>Pin code</label>
+                                      {{address_form.pincode}}
+                                    </div>       
+                              </div>
+
+
+                              <div class="col-md-6 col-xs-12">
+                                  <div class="pib-item">
+                                      <label>Email</label>
+                                      {{address_form.email}}
+                                    </div>
+                                  <div class="pib-item">
+                                  </div>
+                              </div>
+
+
+                              <div class="col-md-6 col-xs-12">
+                                <div class="pib-item">
+                                    <label>Phone Number</label>
+                                    {{address_form.phone}}
+                                  </div>
+                                <div >
+                              </div>
+                              </div>
+                              
+                              <div class="col-xs-12">
+                                    <div class="pib-save-change">
+                                      <input type="submit" value="submit" class="btn btn-success" ></div>
+                                    </div>
+                                </div>
+                            </div>
+                          </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- my-account-area-end -->
+    <script>    
+      document.forms[1].setAttribute("enctype","multipart/form-data")
+    </script>
+  
+
+  {%endblock%}

@@ -1,0 +1,282 @@
+{% extends 'user/base.html' %}
+{% block content%}
+{% load static%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"> </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.js"></script>
+<div class="my-account-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="my-account-welcome">
+                    <div>
+                        {% if user.image %}<img src="{{user.image.url}}" alt="image"
+                            style="width: 10rem; height: 10rem;border-radius: 2rem;">{%endif%}
+
+                    </div>
+                    <br><br>
+                    <h4 class="my-account-title">Welcome back!</h4>
+                    <ul>
+                        <li><a href="{% url 'user_profile' user.id%}">Personal Information</a></li>
+                        <li><a href="{% url 'edit_profile' user.id %}">Update Profile</a></li>
+                        <li><a href="{% url 'edit_address' user.id %}">Update Address</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="personal-information">
+                    <h4 class="my-account-title">Address Book</h4>
+                    <div class="personal-information-box">
+                        <div class="">
+                        </div>
+                        <style>
+                            * {
+                              box-sizing: border-box;
+                            }
+                            
+                            body {
+                              font-family: Arial, Helvetica, sans-serif;
+                            }
+                            
+                            /* Float four columns side by side */
+                            .column {
+                              float: left;
+                              width: 25%;
+                              padding: 0 10px;
+                            }
+                            
+                            /* Remove extra left and right margins, due to padding */
+                            .row {margin: 0 -5px;}
+                            
+                            /* Clear floats after the columns */
+                            .row:after {
+                              content: "";
+                              display: table;
+                              clear: both;
+                            }
+                            
+                            /* Responsive columns */
+                            @media screen and (max-width: 600px) {
+                              .column {
+                                width: 100%;
+                                display: block;
+                                margin-bottom: 20px;
+                              }
+                            }
+                            
+                            /* Style the counter cards */
+                            .card {
+                              box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                              padding: 16px;
+                              text-align: center;
+                              background-color: #f1f1f1;
+                            }
+                            </style>
+                            
+                            <div class="row">
+                                <form id="adrs"></form>
+                                {% for address in adresses%}
+                                
+                              <div class="column">
+                                <div class="card">
+                                    <div class="col-md-1 pt-2 text-center">
+                                        <input type="radio" onclick="ab('{{address.id}}')" onchange="a('{{address.first_name}}','{{address.last_name}}','{{address.address_line_1}}','{{address.address_line_2}}','{{address.city}}','{{address.state}}','{{address.country}}','{{address.pincode}}','{{address.phone}}','{{address.email}}')" id="{{address.id}}" name="address" value="{{address.id}}">
+                                    </div>
+                                  <h3>{{address.first_name}} {{address.last_name}}</h3>
+                                  <p>{{address.address_line_1}}{{address.address_line_2}}</p>
+                                  <p>{{address.city}},{{address.state}}</p>
+                                  <p>{{address.country}}, PIN: {{address.pincode}}</p>
+                                  <p>Phone: {{address.phone}}</p>
+                                </div>
+                                <a href="{% url 'del_add' address.id%}" class="btn btn-primary" style="margin-top: 2rem;">DELETE</a>
+                              </div>
+                              {%endfor%}
+                            
+
+                            </button>
+                              
+                              
+                            </div>
+                            
+                         <div>
+                            <form class="form-horizontal" method="POST" action="{% url 'update_address' %}">
+
+                                <div class="billing-address" style="margin-top: 2rem;">
+                                    <h4 class="checkout-box-title">Update</h4>
+        
+                                    <div class="checkout-billing-adress-box">
+                                        <div class="billing-address-input clearfix">
+                                            {%csrf_token%}
+                
+                                            <label>COUNTRY *</label>
+                                            <input type="text" name="country"  id="country">
+                                        </div>
+                                        <div class="billing-address-input clearfix">
+                                            <label>FIRST NAME *</label>
+                                            <input type="text" name="first_name" id="first_name" >
+                                        </div>
+                                        <div class="billing-address-input clearfix">
+                                            <label>LAST NAME *</label>
+                                            <input type="text" name="last_name" id="last_name" >
+                                        </div>
+                                        <div class="billing-address-input clearfix">
+                                            <label>ADDRESS *</label>
+                                            <input type="text" placeholder="Street Address" name="address_line_1" id="address_line_1" >
+                                        </div>
+                                        <div class="billing-address-input clearfix">
+                                            <label>ADDRESS *</label>
+                                            <input type="text" placeholder="Street Address" name="address_line_2" id="address_line_2" >
+                                        </div>
+            
+                                        <div class="billing-address-input clearfix">
+                                            <label>TOWN  *</label>
+                                            <input type="text" name="city" id="city" >
+                                        </div>
+                                        <div class="billing-address-input clearfix">
+                                            <label>STATE</label>
+                                            <input type="text" name="state" id="state" >
+                                        </div>
+                                        <div class="billing-address-input clearfix">
+                                            <label>POSTCODE  *</label>
+                                            <input type="text" name="pincode" id="pincode" >
+                                        </div>
+                                        <div class="billing-address-input clearfix">
+                                            <label>EMAIL ADDRESS *</label>
+                                            <input type="text" name="email" id="email" >
+                                        </div>
+                                        <div class="billing-address-input clearfix">
+                                            <label>PHONE *</label>
+                                            <input type="text" name="phone" id="phone" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="checkout-page-button hvr-bs"> submit</button>
+                            </div>
+                              
+                                
+                                </form>
+        
+        
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- my-account-area-end -->
+<script>
+    function a(first_name,last_name,address_line_1,address_line_2,city,state,country,pincode,phone_number,email){
+
+        document.getElementById('first_name').value = first_name
+        document.getElementById('last_name').value = last_name
+        document.getElementById('address_line_1').value = address_line_1
+        document.getElementById('address_line_2').value = address_line_2
+        document.getElementById('city').value = city
+        document.getElementById('state').value = state
+        document.getElementById('country').value = country
+        document.getElementById('pincode').value = pincode
+        document.getElementById('phone').value = phone_number
+        document.getElementById('email').value = email
+
+
+        console.log(first_name,last_name,address_line_1,address_line_2,city,state,country,pincode,phone_number,email)
+    }
+    </script>
+    <script>
+        function ab(id){
+
+        console.log(id)
+        var id = id
+
+        $.ajax({
+        url: "{% url 'update_address' %}",
+        method: 'POST',
+        dataType: 'json',
+        data: {
+          id: id,first_name:first_name,last_name:last_name,address_line_1:address_line_1,address_line_2:address_line_2,city:city,state:state,country:country,pincode:pincode,phone_number:phone_number,email:email,
+          
+          csrfmiddlewaretoken: "{{csrf_token}}"
+        },
+        success: (response) => {
+          location.reload()
+        }
+      })
+
+    }
+
+    </script>
+
+<script>
+    $(document).ready(function (e) {
+        $.validator.addMethod("alpha", function (value, element) {
+            return this.optional(element) || value == value.match(/^[a-zA-Z\s]+$/);
+            // --                                    or leave a space here ^^
+        });
+
+        $.validator.addMethod("noSpace", function (value, element) {
+            return value == '' || value.trim(' ').length >= 4;
+        }, "At least four characters");
+
+        //email
+        $.validator.addMethod("isEmail", function (value, element) {
+            return this.optional(element) || value == value.match(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i);
+
+        });
+        //ajax call
+
+
+        $("#form").validate({
+            rules: {
+                first_name: {
+
+                    required: true,
+                    minlength: 4,
+                    alpha: true,
+                    noSpace: true,
+                },
+                last_name: {
+
+                    required: true,
+                    minlength: 1,
+                    alpha: true,
+
+                },
+                phone_no: {
+                    minlength: 10,
+                    maxlength: 10,
+                    number: true
+                },
+                email: {
+                    required: true,
+                    isEmail: true
+                },
+
+
+            },
+
+            messages: {
+                first_name: {
+                    alpha: "Please enter letters only"
+                },
+                phone_no: {
+                    number: "Please enter a valid mobile",
+                    minlength: "Please enter at least 10 digit",
+                    maxlength: "mobile number maximum contain 10 digit",
+                },
+
+                email: {
+                    isEmail: "Email not valid"
+                },
+
+
+
+            },
+        })
+
+    })
+</script>
+{%endblock%}

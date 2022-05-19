@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+       @page{
+           size: "A5";
+           margin: 0;
+
+        @bottom-right{
+            content: "page" counter() page "of" counter(pages);
+           }
+       } 
+
+    </style>
+<div>
+    <h4 style="margin-top: 5rem; text-align: center;">SALES REPORT</h4>
+</div>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Order Number</th>
+        <th scope="col">Date</th>
+        <th scope="col">User</th>
+        <th scope="col">Contact</th>
+        <th scope="col">Payment</th>
+        <th scope="col">Coupon</th>
+        <th scope="col">Status</th>
+        <th scope="col">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in orders%}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>#{{i.order_number}}</td>
+
+        <td>{{i.updated_at}}</td>
+        <td>{{i.user}}</td>
+        <td>{{i.user.phone_no}}</td>
+        <td>Paypal</td>
+        <td>{{i.coupon_offer}}</td>
+        <td>{{i.status}}</td>
+        <td>{{i.order_total}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+
+</html>

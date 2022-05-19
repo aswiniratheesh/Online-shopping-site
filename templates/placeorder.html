@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="undefined" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js">
+    <style>
+        body {
+            background-color: #e6ebf4
+        }
+        
+        .card {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 5px 6px 6px 2px #e9ecef
+        }
+        
+        .heading {
+            font-size: 23px;
+            font-weight: 00
+        }
+        
+        .text {
+            font-size: 16px;
+            font-weight: 500;
+            color: #b1b6bd
+        }
+        
+        .pricing {
+            border: 2px solid #304FFE;
+            background-color: #f2f5ff
+        }
+        
+        .business {
+            font-size: 20px;
+            font-weight: 500
+        }
+        
+        .plan {
+            color: #aba4a4
+        }
+        
+        .dollar {
+            font-size: 16px;
+            color: #6b6b6f
+        }
+        
+        .amount {
+            font-size: 50px;
+            font-weight: 500
+        }
+        
+        .year {
+            font-size: 20px;
+            color: #6b6b6f;
+            margin-top: 19px
+        }
+        
+        .detail {
+            font-size: 22px;
+            font-weight: 500
+        }
+        
+        .cvv {
+            height: 44px;
+            width: 73px;
+            border: 2px solid #eee
+        }
+        
+        .cvv:focus {
+            box-shadow: none;
+            border: 2px solid #304FFE
+        }
+        
+        .email-text {
+            height: 55px;
+            border: 2px solid #eee
+        }
+        
+        .email-text:focus {
+            box-shadow: none;
+            border: 2px solid #304FFE
+        }
+        
+        .payment-button {
+            height: 70px;
+            font-size: 20px
+        }
+        .razorpay-payment-button{
+            background-color: rgb(23, 4, 189);
+            border-color: rgb(23, 4, 189);
+            color: white;
+            width: 100%;
+            font-size: 1.5rem;
+           
+            border-radius: 0;
+
+         
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5 mb-5 d-flex justify-content-center">
+        <div class="card p-5">
+            <div>
+                <h4 class="heading">Apply Coupon</h4>
+                <form method="POST" action="#">
+                    {% csrf_token %}
+                <input type="text" name='coupon' placeholder="enter coupon code" id='coupon' size="30" >
+                <button id="btncoupon" type="button" onclick="applyCoupon()" style="margin-left:15px ;background-color:blue;color:white">Apply</button>
+                </form>
+            </div>
+            <div class="pricing p-3 rounded mt-4 d-flex justify-content-between">
+                <div class="images d-flex flex-row align-items-center"> <img src="https://i.imgur.com/S17BrTx.png" class="rounded" width="60">
+                    <div class="d-flex flex-column ml-4"> <span class="business">Total</span> <span class="plan">Amount</span> </div>
+                </div>
+                <!--pricing table-->
+                <div class="d-flex flex-row align-items-center"> <sup class="dollar font-weight-bold">Rs</sup> <span id="grand" class="amount ml-1 mr-1">{{grandtotal}}</span>  </div> <!-- /pricing table-->
+            </div> <span class="detail mt-5">Payment details</span>
+            <div >
+                
+                <div class="credit rounded mt-4 d-flex justify-content-between align-items-center" id="paypal-button-container"></div>
+                <form action="{%url 'razorsuccess' %}" method="POST" style="text-align: center;" class="razorpay-payment-button">
+                    {% csrf_token %}
+                    <script
+                    src="https://checkout.razorpay.com/v1/checkout.js"
+                    data-key="rzp_test_krpej6LVaGfmNT"
+                    data-amount="{{subtotal}}"
+                    data-currency="INR"
+                    data-order_id="{{response.id}}"
+                    data-buttontext="Pay with Razorpay"
+                    data-name="{{request.user.username}}"
+                    data-description=""
+                    data-image=""
+                    data-prefill.name="{{request.user.username}}"
+                    data-prefill.email="{{request.user.email}}"
+                    data-prefill.num="{{request.user.profile.num}}"
+                    data-theme.color="#F37254"
+                     ></script>
+                <input type="hidden" custom="Hidden Element" name="hidden">
+                </form>
+               
+            </div>
+            <div class="credit rounded mt-2 d-flex justify-content-between align-items-center">
+                <div class="d-flex flex-row align-items-center"> 
+                    
+                    
+                
+            </div>
+            
+            <!-- <div class="email mt-2"> <input type="text" class="form-control email-text" placeholder="Email Address"> </div>
+            <div class="mt-3"> <button class="btn btn-primary btn-block payment-button">Proceed to payment <i class="fa fa-long-arrow-right"></i></button> </div> -->
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <script src="https://www.paypal.com/sdk/js?client-id=AUk25tqRCG1o7_-UQC2ej3R7Bk_5BTWqt4tqjGgR1F-_7MYpUjsdfl8tD5p-SWjtyvdL9Dykruu24YsL&currency=USD"></script>
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        
+        // Render the PayPal button into #paypal-button-container
+        var amount = {{ grandtotal }}
+       
+        paypal.Buttons({
+
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: amount,
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    // Show a success message to the buyer
+                    console.log(details);
+                    window.location.replace('/paypal/')
+                    alert(' Transaction completed by ' + details.payer.name.given_name + '!')
+                   
+                });
+            }
+
+
+        }).render('#paypal-button-container');
+    </script>
+    <!-- <script>
+     let raz = document.getElementsByTagName("input")[1].setAttribute("name","razorpay")
+    </script> -->
+
+    <script>
+        function applyCoupon(){
+            let code =$("#coupon").val()
+            let data = {
+                'csrfmiddlewaretoken':'{{csrf_token}}',
+                'code':code
+            };
+            $.ajax({
+                url:"{% url 'couponcheck' %}",
+                method:'POST',
+                data: data,
+                dataType:"json",
+                success:function(data){
+                    if(data == 'false'){
+                        alert('Enter valid coupon');
+                    }
+                   
+                    $("#grand").html(data.grandtotal);
+                    
+                }
+            }
+
+            )
+
+        }
+    </script>
+</body>
+</html>
